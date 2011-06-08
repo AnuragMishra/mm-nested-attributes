@@ -110,7 +110,7 @@ module MongoMapper
 
             elsif !reject_new_record?(association_name, attributes_collection)
               if respond_to?(association_name)
-                if association.one?
+                if association.class == MongoMapper::Plugins::Associations::ManyAssociation
                   attributes_collection[self.class.name.foreign_key] = id
                 end
                 klass = association_name.to_s.classify.constantize

@@ -27,9 +27,9 @@ module MongoMapper
             before_validation :save_associations
 
             def save_associations
-              associations.each do |key,association|
+              associations.each do |key, association|
                 item_class = association.class
-                send(key).save! if nested_attributes_options.keys.include?(association.name) && item_class != MongoMapper::Plugins::Associations::ManyAssociation
+                send(key).try(:save!) if nested_attributes_options.keys.include?(association.name) && item_class != MongoMapper::Plugins::Associations::ManyAssociation && !association.embeddable?
               end
             end
 }, __FILE__, __LINE__

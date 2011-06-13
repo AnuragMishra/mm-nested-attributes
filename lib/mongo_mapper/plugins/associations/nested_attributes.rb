@@ -113,7 +113,7 @@ module MongoMapper
                 if association.class == MongoMapper::Plugins::Associations::ManyAssociation
                   attributes_collection[self.class.name.foreign_key] = id
                 end
-                klass = association_name.klass
+                klass = association.klass
                 send("#{association_name}=",klass.create!(attributes_collection.except(*UNASSIGNABLE_KEYS)))
 
               else
